@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "storeit-f04dd",
+    "development": "demo-storeit-f04dd"
+  }
+}
