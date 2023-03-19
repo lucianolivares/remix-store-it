@@ -4,6 +4,10 @@ node_modules
 /build
 /public/build
 .env
-.env.sh
+env.sh
 
-.storeit-f04dd-firebase-adminsdk-mujfc-442d4541ce.json
+storeit-f04dd-firebase-adminsdk-mujfc-442d4541ce.json
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+todo.md
