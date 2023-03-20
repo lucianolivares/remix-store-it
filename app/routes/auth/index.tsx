@@ -47,11 +47,12 @@ export const action: ActionFunction = async ({ request }) => {
   }
 };
 export const loader: LoaderFunction = async ({ request }) => {
-  const user = await auth.user(request)
-  if (user) {
-    return redirect('/stores')
+  // redirect if already signed in
+  if (await auth.user(request)) {
+    return redirect('/stores');
+  } else {
+    return null;
   }
-  return null
 };
 export default function Login() {
   const actionError = useActionData();

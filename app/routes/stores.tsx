@@ -4,7 +4,7 @@ import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { auth } from "~/auth.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  await auth.requireUser(request, "admin", "/auth")
+  await auth.requireUser(request, null, "/auth")
   return await auth.user(request);
 };
 
