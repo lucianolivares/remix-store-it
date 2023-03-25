@@ -1,31 +1,30 @@
-import type { LoaderFunction } from "@remix-run/node";
+import type { LoaderFunction} from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { auth } from "~/auth.server";
 import type { AuthUser } from "~/auth.server/auth-types";
-import { db } from "~/firebase";
+import { getProducts, getStoreId } from "~/controllers.server/stores";
+
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const user: AuthUser = await auth.user(request);
-  const store  = params.store || ''
-  const userRef = await db.collection("users").doc(user.id);
-  const doc = await userRef.get();
-  if (!doc.exists) {
-    return null;
+  const store = params.store || ''
+  if ( !store ) {
+    return redirect('/stores')
   }
-  const data = doc.data()
-  const stores = data?.stores
-
-  if (stores?.[store] === undefined) {
-    return redirect("/stores");
+  // Si no es una ID valida quizas mostrar mensaje
+  const storeId = await getStoreId(user.id, store)
+  if (storeId === '' ) {
+    return redirect('/stores')
   }
-  const products = stores[store] || {};
+  const products = await getProducts(user.id, storeId)
   return {
     user: await auth.user(request),
-    store: store,
-    products: products,
+    store: params.store,
+    products
   };
 };
+
 
 export default function StoreRoute() {
   const { store, products } = useLoaderData();
@@ -35,7 +34,7 @@ export default function StoreRoute() {
         {store}
       </h1>
 
-      <Outlet context={products}/>
+      <Outlet context={{products: products, store: store}}/>
     </div>
   );
 }
