@@ -2,6 +2,7 @@ import type { LoaderFunction} from "@remix-run/node";
 
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { auth } from "~/auth.server";
+import type { AuthUser } from "~/auth.server/auth-types";
 
 export const loader: LoaderFunction = async ({ request }) => {
   await auth.requireUser(request, null, "/auth")
@@ -9,7 +10,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function StoresRoute() {
-  const user = useLoaderData();
+  const user: AuthUser = useLoaderData();
 
   return (
     <div className="dark:bg-gray-800 min-h-screen">
