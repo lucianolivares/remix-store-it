@@ -19,7 +19,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   }
   const products = await getProducts(user.id, storeId)
   return {
-    user: await auth.user(request),
+    user: user,
     store: params.store,
     products
   };
