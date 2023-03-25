@@ -28,7 +28,7 @@ export default function StoresIndexRoute() {
       </h1>
       <main className="flex flex-col">
         <StoresList stores={stores} />
-        <Link className="rounded-full m-auto p-4 bg-teal-500" to="new-store">
+        <Link className="rounded-full m-auto px-4 py-2 bg-teal-500" to="new-store">
           Nuevo Store
         </Link>
       </main>
