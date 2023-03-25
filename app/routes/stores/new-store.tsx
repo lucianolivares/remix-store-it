@@ -5,12 +5,13 @@ import { Form, useActionData } from "@remix-run/react";
 import { useRef } from "react";
 import { auth } from "~/auth.server";
 import type { AuthUser } from "~/auth.server/auth-types";
+import { getStoreId } from "~/controllers.server/stores";
 import { db } from "~/firebase";
 import type { AppError } from "~/util/error-type";
 
 export const action: ActionFunction = async ({ request }) => {
-  const form = await request.formData();
   const user: AuthUser = await auth.user(request);
+  const form = await request.formData();
   const store: any = form.get("store");
   if (!store) {
     return json<AppError>(
@@ -22,10 +23,22 @@ export const action: ActionFunction = async ({ request }) => {
       { status: 400 }
     );
   }
-  const storePath = `stores.${store}`;
-  const docRef = db.collection("users").doc(user.id);
-  const res = await docRef.update({
-    [storePath]: {},
+  // Crear un documento store validando que no exista uno con ese nombre
+  // si no existe se crea el nuevo documento y vuelve a la pantalla anterior
+  const storeId = await getStoreId(user.id, store);
+  if (storeId !== "") {
+    return json<AppError>(
+      {
+        status: "validationFailure",
+        errorCode: "new-store/name-used",
+        errorMessage: "Ya existe esta store",
+      },
+      { status: 400 }
+    );
+  }
+  const colRef = db.collection("users").doc(user.id).collection("stores");
+  const res = await colRef.add({
+    name: store,
   });
   if (!res) {
     return json<AppError>(
