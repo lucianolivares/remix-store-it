@@ -34,7 +34,6 @@ export class Users extends Controller<UserType, User> {
       if (await this.getByUsername(userData.username)) {
         throw Error(`Users/createUser - user already exists`);
       }
-      userData.stores = {}
 
       if (!userData.role) {
         userData.role = 'guest';
