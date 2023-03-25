@@ -1,7 +1,8 @@
 import type { ActionFunction, LoaderFunction} from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useActionData } from "@remix-run/react";
+import { Form, useActionData } from "@remix-run/react";
+import { useRef } from "react";
 import { auth } from "~/auth.server";
 import type { AppError } from "~/util/error-type";
 
@@ -57,6 +58,8 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Login() {
   const actionError = useActionData();
   const actionData = useActionData<typeof action>();
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   return (
     <section className="bg-gray-50 dark:bg-gray-900 h-screen">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -72,7 +75,7 @@ export default function Login() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Ingresa a tu cuenta
             </h1>
-            <form className="space-y-4 md:space-y-6" method="post">
+            <Form className="space-y-4 md:space-y-6" method="post">
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Correo Electronico
@@ -81,6 +84,7 @@ export default function Login() {
                   type="email"
                   id="email"
                   name="email"
+                  ref={emailRef}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="nombre@ejemplo.com"
                   defaultValue={actionData?.fields?.email}
@@ -100,6 +104,7 @@ export default function Login() {
                   type="password"
                   name="password"
                   id="password"
+                  ref={passwordRef}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
@@ -147,7 +152,7 @@ export default function Login() {
                   Registrar
                 </a>
               </p>
-            </form>
+            </Form>
           </div>
         </div>
       </div>
