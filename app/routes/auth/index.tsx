@@ -1,7 +1,7 @@
 import type { ActionFunction, LoaderFunction} from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useActionData, useSearchParams } from "@remix-run/react";
+import { useActionData } from "@remix-run/react";
 import { auth } from "~/auth.server";
 import type { AppError } from "~/util/error-type";
 
@@ -56,7 +56,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 export default function Login() {
   const actionError = useActionData();
-  const [searchParams] = useSearchParams();
   const actionData = useActionData<typeof action>();
   return (
     <section className="bg-gray-50 dark:bg-gray-900 h-screen">
