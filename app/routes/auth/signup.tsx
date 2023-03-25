@@ -38,7 +38,7 @@ export const action: ActionFunction = async ({ request }) => {
         {
           status: "validationFailure",
           errorCode: "signup/invalid-password",
-          errorMessage: "Password fields cannot be empty and must match",
+          errorMessage: "Debes ingresar una contraseña y deben coincidir",
         },
         { status: 400 }
       );
