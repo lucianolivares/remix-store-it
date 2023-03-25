@@ -30,7 +30,7 @@ export default function StoreRoute() {
   const { store, products } = useLoaderData();
   return (
     <div className="flex flex-col">
-      <h1 className="text-3xl text-center mt-4 p-2 font-display font-medium dark:text-white">
+      <h1 className="text-center pt-8 mb-4 text-4xl font-bold tracking-tight leading-none dark:text-gray-100">
         {store}
       </h1>
 

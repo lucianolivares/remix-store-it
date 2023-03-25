@@ -18,18 +18,17 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function StoresIndexRoute() {
   const data = useLoaderData();
-  const user: AuthUser = data.user;
   const stores: Array<StoreType> = data?.stores;
 
   return (
     <div>
-      <h1 className="text-center pt-8 mb-4 text-4xl font-bold tracking-tight leading-none dark:text-white">
-        Stores de {user.username} 📚
+      <h1 className="text-center pt-8 mb-4 text-4xl font-bold tracking-tight leading-none dark:text-gray-100">
+        Almacenes 📚
       </h1>
       <main className="flex flex-col">
         <StoresList stores={stores} />
-        <Link className="rounded-full m-auto px-4 py-2 bg-teal-500" to="new-store">
-          Nuevo Store
+        <Link className="mx-auto shadow bg-teal-500 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" to="new-store">
+          Nuevo Almacen
         </Link>
       </main>
     </div>

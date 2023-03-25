@@ -11,7 +11,7 @@ export default function NavBar( {user}: {user: AuthUser}) {
         <form action="/auth/logout" method="post" className="p-4">
           <button
             type="submit"
-            className="rounded-full bg-orange-500 p-2 text-gray-100"
+            className="shadow bg-orange-500 hover:bg-orange-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
           >
             Cerrar Sessión{user.name}
           </button>

@@ -73,7 +73,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function NewProductRoute() {
-  const {store} = useOutletContext<{store: string}>();
+  const { store } = useOutletContext<{ store: string }>();
   const actionData = useActionData();
   const storeRef = useRef(null);
   const nameRef = useRef(null);
@@ -81,9 +81,9 @@ export default function NewProductRoute() {
   const minStockRef = useRef(null);
 
   return (
-    <div className="flex flex-col gap-4 text-gray-200">
-      <p className="m-auto">Agregar Nuevo Producto</p>
-      <Form method="post" className="flex flex-col text-gray-800">
+    <div className="flex flex-col gap-4 text-gray-100 w-full max-w-sm mx-auto">
+      <p className="mx-auto">Agregar nuevo producto</p>
+      <Form method="post" className="w-full max-w-sm text-gray-800">
         <input
           type="hidden"
           name="store"
@@ -91,33 +91,65 @@ export default function NewProductRoute() {
           ref={storeRef}
           value={store}
         />
-        <div className="flex flex-col m-auto gap-4">
-          <label className="text-gray-200 m-auto">
-            Nombre:
+
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label className="block text-gray-100 font-bold md:text-right mb-1 md:mb-0 pr-4">
+              Nombre:
+            </label>
+          </div>
+          <div className="md:w-2/3">
             <input
               type="text"
               name="name"
               id="name"
               ref={nameRef}
-              className="text-gray-800"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
-          </label>
-          <label className="text-gray-200 m-auto">
-            Stock Actual:
-            <input type="number" name="stock" id="stock" ref={stockRef} />
-          </label>
-          <label className="text-gray-200 m-auto">
-            Stock Minimo:
+          </div>
+        </div>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label className="block text-gray-100 font-bold md:text-right mb-1 md:mb-0 pr-4">
+              Stock Actual:
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input
+              type="number"
+              name="stock"
+              id="stock"
+              ref={stockRef}
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            />
+          </div>
+        </div>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label className="block text-gray-100 font-bold md:text-right mb-1 md:mb-0 pr-4">
+              Stock Minimo:
+            </label>
+          </div>
+          <div className="md:w-2/3">
             <input
               type="number"
               name="minStock"
               id="minStock"
               ref={minStockRef}
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
-          </label>
-          <button type="submit" className="rounded-full p-2 bg-green-500">
-            Agregar
-          </button>
+          </div>
+        </div>
+        <div className="md:flex md:items-center">
+          <div className="md:w-1/3"></div>
+          <div className="md:w-2/3">
+            <button
+              type="submit"
+              className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            >
+              Agregar
+            </button>
+          </div>
         </div>
       </Form>
       {actionData?.errorCode && (

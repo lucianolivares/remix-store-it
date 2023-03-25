@@ -58,28 +58,44 @@ export default function NewStoreRoute() {
   const actionError = useActionData();
   const storeRef = useRef(null);
   return (
-    <div className="flex flex-col">
-      <h1 className="text-gray-200 text-3xl m-auto">
-        Agregar almacenamiento nuevo
+    <div className="flex flex-col gap-4 text-gray-200 w-full max-w-sm mx-auto">
+      <h1 className="text-center pt-8 mb-4 text-4xl font-bold tracking-tight leading-none dark:text-gray-100">
+        Agregar almacenamiento
       </h1>
-      <Form method="post" className="m-auto">
-        <div className="flex flex-col gap-4 m-4">
-          <label className="m-auto text-gray-200">
-            Nombre: <input type="text" name="store" id="store" ref={storeRef} />
-          </label>
-          <button
-            type="submit"
-            className="rounded-full p-2 bg-green-500 m-auto"
-          >
-            Agregar
-          </button>
-          {actionError?.errorCode && (
-            <p>
-              <em>Login failed: {actionError.errorMessage}</em>
-            </p>
-          )}
+      <Form method="post" className="w-full max-w-sm text-gray-800">
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label className="block text-gray-100 font-bold md:text-right mb-1 md:mb-0 pr-4">
+              Nombre:
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input
+              type="text"
+              name="store"
+              id="store"
+              ref={storeRef}
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-teal-500"
+            />
+          </div>
+        </div>
+        <div className="md:flex md:items-center">
+          <div className="md:w-1/3"></div>
+          <div className="md:w-2/3">
+            <button
+              type="submit"
+              className="shadow bg-teal-500 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            >
+              Agregar
+            </button>
+          </div>
         </div>
       </Form>
+      {actionError?.errorCode && (
+        <p>
+          <em>Crear almacenamiento fallo: {actionError.errorMessage}</em>
+        </p>
+      )}
     </div>
   );
 }

@@ -9,7 +9,7 @@ export default function ProductsList({
   store: string;
 }) {
   return (
-    <ul className="grid grid-cols-1 gap-2 my-4 text-gray-200 mx-auto">
+    <ul className="grid grid-cols-1 gap-2 my-4 text-gray-100 mx-auto">
       {!products.length && (
         <h1 className="text-2xl m-auto">No tienes productos agregados</h1>
       )}

@@ -1,3 +1,16 @@
+import type { LoaderFunction} from "@remix-run/node";
+import { redirect } from "@remix-run/node";
+import { auth } from "~/auth.server";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  // redirect if already signed in
+  if (await auth.user(request)) {
+    return redirect('/stores');
+  } else {
+    return null;
+  }
+};
+
 export default function IndexRoute() {
   return (
     <main className="bg-white dark:bg-gray-900 h-screen">
